@@ -45,7 +45,7 @@ setup(
     author='AguaClara',
     author_email='aguaclara@cornell.edu',
     description='aide_render',
-    download_url='',
+    download_url='https://github.com/AguaClara/aide_render/archive/0.0.0.tar.gz',
     cmdclass={
         'coverage': Coverage,
     },
@@ -68,6 +68,6 @@ setup(
         'tox>=2.3.1,<3.0.0',
         'virtualenv>=15.0.1,<16.0.0'
     ],
-    url='',
+    url='https://github.com/AguaClara/aide_render',
     version='0.0.0'
 )
