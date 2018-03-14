@@ -1,0 +1,3 @@
+inherited_variable: {{ parent_variable }}
+child_variable: "I am from the child"
+child_variable_expressed: {{ child_variable }}

@@ -49,16 +49,19 @@ setup(
     cmdclass={
         'coverage': Coverage,
     },
-    install_requires=[
+    install_requires=['pyyaml',
+    'jinja2','aide_design', 'numpy'
     ],
     license='Apache License (2.0)',
     name='aide_render',
     packages=[
         'aide_render',
     ],
+    setup_requires=['pytest-runner'],
     scripts=[],
     test_suite='tests',
     tests_require=[
+        'pytest',
         'codecov>=2.0.3,<3.0.0',
         'coverage>=4.0.3,<5.0.0',
         'Sphinx>=1.4.1,<2.0.0',
@@ -66,5 +69,5 @@ setup(
         'virtualenv>=15.0.1,<16.0.0'
     ],
     url='',
-    version='1.0.0'
+    version='0.0.0'
 )

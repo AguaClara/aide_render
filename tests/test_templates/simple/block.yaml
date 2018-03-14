@@ -1,0 +1,17 @@
+# This is a template docstring. Much like a function docstring, it will
+# specify the expected variables that are already defined in the template's
+# namespace. This should be written as a numpy docstring:
+
+# Generate a cube with custom side lengths.
+#
+# Parameters
+# ==========
+# side_lengths: pint quantity of length dimension
+#   specify the side_length of the generated block.
+#
+# Returns
+# =======
+# A YAML specifying dimensions for a block to be created.
+
+dp:
+  side_lengths: {{ side_lengths }}

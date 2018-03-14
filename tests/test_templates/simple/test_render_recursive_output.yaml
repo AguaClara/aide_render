@@ -1,0 +1,4 @@
+{'child': {'child_variable': 'I am from the child',
+                  'child_variable_expressed': 'I am from the child',
+                   'inherited_variable': 'this is a variable defined in the parent'},
+          'variable': 'this is a variable defined in the parent'}

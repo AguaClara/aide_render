@@ -4,10 +4,18 @@ aide\_render package
 Submodules
 ----------
 
-aide\_render\.utils module
---------------------------
+aide\_render\.render module
+---------------------------
 
-.. automodule:: aide_render.utils
+.. automodule:: aide_render.render
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+aide\_render\.yaml module
+-------------------------
+
+.. automodule:: aide_render.yaml
     :members:
     :undoc-members:
     :show-inheritance:
