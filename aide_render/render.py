@@ -89,6 +89,11 @@ def render(stream, d=None):
         env.globals.update(d)
     if variables is not None:
         env.globals.update(variables)
+
+    # Add 'built in' modules
+    builtins = {"u": u, "os": os, "render": render, "open": open}
+    env.globals.update(builtins)
+
     template = env.get_template("template")
     return yaml.load(template.render())
 

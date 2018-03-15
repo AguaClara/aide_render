@@ -1,0 +1,2 @@
+density: 300 kg/liter
+mass: {{ density*side_length**3 }}
