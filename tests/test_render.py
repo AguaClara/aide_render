@@ -4,17 +4,9 @@ aide_render tests.
 
 import pytest
 from aide_design.play import *
-from aide_render.render import render, render_constants, assert_inputs, source_from_path
+from aide_render.render import render, render_constants, assert_inputs, source_from_path, start_aide_render
 from aide_render import yaml
 import os
-
-
-def test_yaml_units():
-    """
-    Test the conversion of YAML that has the units (!u) tags.
-    """
-    s = "!u 1 meter"
-    assert yaml.load(s) == 1*u.meter
 
 
 def test_render_constants():
@@ -29,11 +21,12 @@ def test_render_recursive():
     """
     Test calling render() within a template
     """
-    file_path = os.path.abspath('tests/test_templates/simple/test_render_recursive_parent.yaml')
+    folder_path = os.path.abspath('tests/test_templates/simple')
     output_file_path = os.path.abspath('tests/test_templates/simple/test_render_recursive_output.yaml')
-    d = {"u": u, "os": os, "render": render, "open": open}
-    print(render(open(file_path, 'r'), d))
-    assert render(open(file_path, 'r'), d) == yaml.load(open(output_file_path, 'r'))
+    user_inputs = {"flow": 5*u.L/u.s}
+    rendered = start_aide_render(folder_path, "test_render_recursive_parent.yaml", user_inputs)
+    print(rendered)
+    assert str(rendered) == source_from_path(output_file_path)
 
 
 def test_assert_inputs():

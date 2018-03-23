@@ -1,0 +1,26 @@
+# A pyramid design.
+
+# First we specify the passed in arguments. We can specify types with the assert_inputs:
+{% if assert_inputs({"h": u.m, "w": u.m, "L": u.m, "density": u.kg/u.m**3, "material": str}) %}
+  # Stuff to print if it is asserted correctly... All of these were asserted correctly!
+{% endif %}
+
+# If the inputs aren't self-explanatory, then a small blurb about ones that need it should go right next to the assert_inputs call.
+
+# If there are some optional inputs, we could specify them in a way that doesn't throw an error by turning silent to
+# true on assert_inputs:
+{% if assert_inputs({"usage": str, "cost": u.dollar}, silent=True) %}
+  # Stuff to print if it is asserted correctly... All of these were asserted correctly!
+{% endif %}
+
+# Render templates that you may depend on:
+{% set block_inputs = {'h': 100*u.cm, "L": 2*u.m, "w": 2*u.feet, 'density': 45*u.kg/u.m**3, 'material': 'rock',
+                      "surface_area_block": surface_area_block, "usage": "pyramid", "cost": 40*u.dollar} %}
+{% set walrus = render("block.yaml", "/Users/ethankeller/git_repos/AguaClara/AIDE/aide_render/tests/test_templates/pyramid_example", d=block_inputs) %}
+
+
+this: is
+a: pyramid
+hp: poo
+cheese:
+  {{ dump(walrus) }}

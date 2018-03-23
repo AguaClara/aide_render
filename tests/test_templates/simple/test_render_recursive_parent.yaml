@@ -1,3 +1,3 @@
-{% set child=render(open(os.path.abspath("tests/test_templates/simple/test_render_recursive_child.yaml"), 'r'), {"parent_variable": variable}) %}
+{% set child=render("test_render_recursive_child.yaml", "/Users/ethankeller/git_repos/AguaClara/AIDE/aide_render/tests/test_templates/simple", d={"parent_variable": "variable"}) %}
 variable: "this is a variable defined in the parent"
 child: {{ child }}

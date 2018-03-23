@@ -1,0 +1,26 @@
+# Let's make a block that can be used within a pyramid (but who knows... maybe we'll use it elsewhere as well!)
+
+# First we specify the passed in arguments. We can specify types with the assert_inputs:
+{% if assert_inputs({"h": u.m, "w": u.m, "L": u.m, "density": u.kg/u.m**3, "material": str}) %}
+  # Stuff to print if it is asserted correctly... All of these were asserted correctly!
+{% endif %}
+
+# If there are some optional inputs, we could specify them in a way that doesn't throw an error by turning silent to
+# true on assert_inputs:
+{% if assert_inputs({"usage": str, "cost": u.dollar}, silent=True) %}
+  # Stuff to print if it is asserted correctly... All of these were asserted correctly!
+{% endif %}
+
+cp: # constant parameters:
+  max_side_length: 2 m
+  texture: smooth
+hp: # hydraulic parameters:
+  surface_area: {{ surface_area_block(h, w, L) }}
+  mass: {{ h* w* L* density }}
+dp: # design parameters (I think we should actually call the hp 'design parameters' and the current dp should be fp for 'fusion parameters'
+  h: {{ h }}
+  w: {{ w }}
+  L: {{ L }}
+  poo: poo
+bp: # budget parameters
+  cost: {{ cost }}
