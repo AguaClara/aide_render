@@ -1,4 +1,6 @@
-inherited_variable: {{ parent_variable }}
+{% macro child(self, parent) %}
+inherited_variable: {{ parent.parent_variable }}
 child_variable: "I am from the child"
-child_variable_expressed: {{ child_variable }}
+child_variable_expressed: {{ self.child_variable }}
 variable: "I am a variable in the child"
+{% endmacro %}

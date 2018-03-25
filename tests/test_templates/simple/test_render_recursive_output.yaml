@@ -1,2 +1,6 @@
-variable: "this is a variable defined in the parent"
-child: {'inherited_variable': 'variable', 'child_variable': 'I am from the child', 'child_variable_expressed': 'I am from the child', 'variable': 'I am a variable in the child'}
+parent_variable: "this is a variable defined in the parent"
+child:
+  inherited_variable: this is a variable defined in the parent
+child_variable: "I am from the child"
+child_variable_expressed: I am from the child
+variable: "I am a variable in the child"

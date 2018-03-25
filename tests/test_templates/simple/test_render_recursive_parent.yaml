@@ -1,3 +1,7 @@
-{% set child=render("test_render_recursive_child.yaml", "/Users/ethankeller/git_repos/AguaClara/AIDE/aide_render/tests/test_templates/simple", d={"parent_variable": "variable"}) %}
-variable: "this is a variable defined in the parent"
-child: {{ child }}
+{% set parent = render_constants("test_render_recursive_parent.yaml") %}
+{% set see = render_constants("test_render_recursive_child.yaml") %}
+{% set self = see %}
+{% import "test_render_recursive_child.yaml" as poop with context %}
+parent_variable: "this is a variable defined in the parent"
+child:
+  {{ poop.child(self, parent) }}

@@ -1,13 +1,17 @@
 # Let's make a block that can be used within a pyramid (but who knows... maybe we'll use it elsewhere as well!)
+# The first thing to know is that we are building a "template module". This is a lot like normal python modules
+# except that it works well in Jinja - that's what we care about. A template module is just a list of macros that
+# can be called. Here's an example of a macro that builds a block:
 
-# First we specify the passed in arguments. We can specify types with the assert_inputs:
-{% if assert_inputs({"h": u.m, "w": u.m, "L": u.m, "density": u.kg/u.m**3, "material": str}) %}
+{% macro block(block_inputs) %}
+# First we check the types of the passed in arguments. We can specify types with the assert_inputs:
+{% if assert_inputs(block_inputs, {"h": u.m, "w": u.m, "L": u.m, "density": u.kg/u.m**3, "material": str}) %}
   # Stuff to print if it is asserted correctly... All of these were asserted correctly!
 {% endif %}
 
 # If there are some optional inputs, we could specify them in a way that doesn't throw an error by turning silent to
 # true on assert_inputs:
-{% if assert_inputs({"usage": str, "cost": u.dollar}, silent=True) %}
+{% if assert_inputs(block_inputs, {"usage": str, "cost": u.dollar}, silent=True) %}
   # Stuff to print if it is asserted correctly... All of these were asserted correctly!
 {% endif %}
 
@@ -24,3 +28,8 @@ dp: # design parameters (I think we should actually call the hp 'design paramete
   poo: poo
 bp: # budget parameters
   cost: {{ cost }}
+
+{% endmacro %}
+
+# If this template is called by itself, we print the result here:
+{% block(block_inputs) %}

@@ -78,81 +78,53 @@ def strip_jinja(string: str):
     return re.sub(regex, '', string)
 
 
-def render_constants(stream):
+@contextfunction
+def render_constants(context, template):
     """
     Strip all Jinja tags from a template and render the remaining constants as
     a dict.
+
+    We access the current context to load the template from it's name. Instead, if you want to render constants
+    directly from a string of the source, pass in None as the context.
+
+    Parameters
+    ----------
+    context: instance of jinja2.runtime.Context or None
+        If used within Jinja templates, ignore the context argument because it is automatically passed in because this
+        is a contextfunction.
+
+    template: string
+        Either the template name if a context is passed in or the function is called within a template, or the source
+        string if the context is passed as None (mainly for testing purposes.)
+
     Examples
     --------
     Jinja tags are returned as None:
 
-    >>> render_constants("{'a jinja statement':{{5*u.m}}, 'jinja expr':{%yo%}, 'string expr': 'this works'}")
+    >>> render_constants(None, "{'a jinja statement':{{5*u.m}}, 'jinja expr':{%yo%}, 'string expr': 'this works'}")
     {'a jinja statement': None, 'jinja expr': None, 'string expr': 'this works'}
 
     The aide_render YAML implementation parses the units tag explicitly (!u) and implicitly ( 5 meter)
-    >>> render_constants("{'explicit unit':!q 20 meter, 'implicit unit': 36 meter**3, 'complex implicit unit': 0.25 meter**3/liter}")
+    >>> render_constants(None, "{'explicit unit':!q 20 meter, 'implicit unit': 36 meter**3, 'complex implicit unit': 0.25 meter**3/liter}")
     {'explicit unit': <Quantity(20.0, 'meter')>, 'implicit unit': <Quantity(36.0, 'meter ** 3')>, 'complex implicit unit': <Quantity(0.25, 'meter ** 3 / liter')>}
 
     """
-    # Convert stream to string so we can use regex.
-    if not isinstance(stream, str):
-        stream = stream.read()
+    # If a context is passed, assume the template variable is the name of the template
+    if context:
+        env = context.environment
+        stream, filename, uptodate = env.loader.get_source(env, template)
+    # If the context isn't passed, assume template variable is the template source.
+    else:
+        stream = template
+        # Convert stream to string so we can use regex.
+        if not isinstance(template, str):
+            stream = template.read()
     stripped_template = strip_jinja(stream)
     d = yaml.load(stripped_template)
     t = type(d)
     if not t == dict:
         raise ValueError("Template must parse into a dict. Template was parsed as a {}".format(str(t)))
     return yaml.load(stripped_template)
-
-
-@contextfunction
-def render(context, template, template_folder_path, d={}):
-    """Render the template with d variables (a dict) and return the rendered file
-    using the aide_render environment.
-    This method should be called from within templates.
-
-    Examples
-    --------
-
-    """
-
-    if not context and not template_folder_path:
-        raise ValueError("Need a template folder path if not called within template.")
-
-    elif template_folder_path:
-        loader = jinja2.loaders.FileSystemLoader(template_folder_path)
-    elif context:
-        loader = context.environment.loader
-
-    overlay_env = jinja2.Environment(
-                             loader=jinja2.loaders.FileSystemLoader(template_folder_path),
-                             trim_blocks=True,
-                             lstrip_blocks=True
-                             )
-
-    source, filename, uptodate = overlay_env.loader.get_source(overlay_env, template)
-
-    # Get the constant variables defined in YAML to put into Jinja context.
-    variables = render_constants(source)
-
-    template = overlay_env.get_template(template)
-
-    new_context = {}
-
-    # Add YAML variables if there are any.
-    if variables:
-        variables.update(d)
-    # Add context variables if there are any.
-    print(context.parent)
-    if context:
-        for k, v in context.parent.items():
-            new_context[k] = v
-
-        new_context.update(variables)
-
-    d = yaml.load(template.render(new_context))
-
-    return d
 
 
 def source_from_path(file_path: str) -> str:
@@ -172,7 +144,7 @@ def source_from_path(file_path: str) -> str:
         return f.read()
 
 @contextfunction
-def assert_inputs(variables:dict, types_dict:dict, strict=True, silent=False):
+def assert_inputs(variables:dict, types_dict:dict, strict=True, silent=False, variables_explicit=None):
     """Check variables against their expected type. Also can check more complex types, such as whether the expected
     and actual dimensionality of pint units are equivalent.
 
@@ -233,6 +205,9 @@ def assert_inputs(variables:dict, types_dict:dict, strict=True, silent=False):
     # Store the missing variables
     missing = []
 
+    if variables_explicit:
+        variables = variables_explicit
+
     for name, t in types_dict.items():
         try:
             var = variables[name]
@@ -264,7 +239,7 @@ def assert_inputs(variables:dict, types_dict:dict, strict=True, silent=False):
             raise TypeError("Can't convert the following implicitly: {}.".format(type_error_dicionary))
     return check
 
-aide_render_dict = {"u": u, "os": os, "render": render, "render_constants": render_constants, "assert_inputs":
+aide_render_dict = {"u": u, "os": os, "render_constants": render_constants, "assert_inputs":
     assert_inputs, "dict": dict, "show_context": show_context, "str": str, "float": float, "np": np, "dump": yaml.dump}
 
 
@@ -274,7 +249,6 @@ def start_aide_render(template_folder_path, template_to_render, user_params):
                              loader=jinja2.loaders.FileSystemLoader(template_folder_path),
                              trim_blocks=True,
                              lstrip_blocks=True,
-                            extensions=[JinjaAtomsExtension]
                              )
     env.globals.update(aide_render_dict)
     return env.get_template(template_to_render).render(user_params)

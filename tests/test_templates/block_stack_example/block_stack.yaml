@@ -1,0 +1,18 @@
+{% macro block_stack(h, w, L) %}
+  {%  set self = render_constants("block_stack.yaml") %}
+block:
+{{ block()|indent(width=2, first=True) }}
+dp:
+  n_block_h: {{ np.floor(h/self.h) }}
+  n_block_w: {{ np.floor(w/self.w) }}
+  n_block_L: {{ np.floor(L/self.L) }}
+{% endmacro %}
+
+{% macro block() %}
+h: 1 m
+w: 1 m
+L: 1 m
+{% endmacro %}
+
+
+{{ block_stack(10*u.m, 20*u.m, 30*u.m) }}

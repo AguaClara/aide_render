@@ -16,7 +16,7 @@
 # Render templates that you may depend on:
 {% set block_inputs = {'h': 100*u.cm, "L": 2*u.m, "w": 2*u.feet, 'density': 45*u.kg/u.m**3, 'material': 'rock',
                       "surface_area_block": surface_area_block, "usage": "pyramid", "cost": 40*u.dollar} %}
-{% set walrus = render("block.yaml", "/Users/ethankeller/git_repos/AguaClara/AIDE/aide_render/tests/test_templates/pyramid_example", d=block_inputs) %}
+{% import "block.yaml" as block %}
 
 
 this: is

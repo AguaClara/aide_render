@@ -9,6 +9,15 @@
     <option name="myDocStringFormat" value="NumPy" />
   </component>
   <component name="TemplatesService">
+    <option name="templateFileTypes">
+      <list>
+        <option value="XHTML" />
+        <option value="XML" />
+        <option value="HTML" />
+        <option value="YAML" />
+      </list>
+    </option>
+    <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
     <option name="TEMPLATE_FOLDERS">
       <list>
         <option value="$MODULE_DIR$/docs/_templates" />
