@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a2a4ca71-883c-42a2-b679-656b3e45b587" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup.py" afterPath="$PROJECT_DIR$/setup.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.pytest_cache/v/cache/lastfailed" afterPath="$PROJECT_DIR$/.pytest_cache/v/cache/lastfailed" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/aide_render/render.py" afterPath="$PROJECT_DIR$/aide_render/render.py" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,7 +16,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/aide_render$test_render.coverage" NAME="test_render Coverage Results" MODIFIED="1523541073066" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/aide_render$pytest.coverage" NAME="pytest Coverage Results" MODIFIED="1523541557515" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/aide_render$pytest.coverage" NAME="pytest Coverage Results" MODIFIED="1523542629957" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/aide_render$render.coverage" NAME="render Coverage Results" MODIFIED="1520877408728" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="FileEditorManager">
@@ -23,8 +24,8 @@
       <file leaf-file-name="test_render.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/test_render.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
-              <caret line="25" column="93" lean-forward="false" selection-start-line="25" selection-start-column="93" selection-end-line="25" selection-end-column="93" />
+            <state relative-caret-position="105">
+              <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
               <folding>
                 <element signature="e#28#41#0" expanded="true" />
               </folding>
@@ -32,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="render.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="render.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/aide_render/render.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="238" column="0" lean-forward="true" selection-start-line="238" selection-start-column="0" selection-end-line="238" selection-end-column="0" />
+            <state relative-caret-position="196">
+              <caret line="98" column="28" lean-forward="true" selection-start-line="98" selection-start-column="28" selection-end-line="98" selection-end-column="28" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -84,11 +85,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="setup.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="setup.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="68" column="36" lean-forward="true" selection-start-line="68" selection-start-column="36" selection-end-line="68" selection-end-column="36" />
+            <state relative-caret-position="64">
+              <caret line="50" column="6" lean-forward="true" selection-start-line="50" selection-start-column="6" selection-end-line="50" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -149,10 +150,10 @@
         <option value="$PROJECT_DIR$/tests/test_templates/simple/test_render_recursive_parent.yaml" />
         <option value="$PROJECT_DIR$/tests/test_templates/simple/test_render_recursive_output.yaml" />
         <option value="$PROJECT_DIR$/aide_render/yaml.py" />
-        <option value="$PROJECT_DIR$/aide_render/render.py" />
         <option value="$PROJECT_DIR$/tests/test_render.py" />
         <option value="$PROJECT_DIR$/tests/test_templates/simple/test_render_constants.yaml" />
         <option value="$PROJECT_DIR$/setup.py" />
+        <option value="$PROJECT_DIR$/aide_render/render.py" />
       </list>
     </option>
   </component>
@@ -192,6 +193,11 @@
             <path>
               <item name="aide_render" type="b2602c69:ProjectViewProjectNode" />
               <item name="aide_render" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aide_render" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aide_render" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -236,7 +242,7 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
   </component>
@@ -261,39 +267,46 @@
       <option name="project" value="LOCAL" />
       <updated>1523542113450</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Updating version number.">
+      <created>1523542164051</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1523542164051</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="pytest - 2018.04.12 at 09h 52m 20s.xml">
-      <configuration name="pytest" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest - 2018.04.12 at 09h 54m 10s.xml">
-      <configuration name="pytest" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest - 2018.04.12 at 09h 56m 10s.xml">
-      <configuration name="pytest" configurationId="tests" />
-    </history-entry>
     <history-entry file="pytest - 2018.04.12 at 09h 58m 27s.xml">
       <configuration name="pytest" configurationId="tests" />
     </history-entry>
     <history-entry file="pytest - 2018.04.12 at 09h 59m 19s.xml">
       <configuration name="pytest" configurationId="tests" />
     </history-entry>
-    <history-entry file="render - 2018.03.12 at 13h 56m 27s.xml">
-      <configuration name="render" configurationId="tests" />
+    <history-entry file="pytest - 2018.04.12 at 10h 11m 40s.xml">
+      <configuration name="pytest" configurationId="tests" />
     </history-entry>
-    <history-entry file="render - 2018.03.12 at 13h 56m 49s.xml">
-      <configuration name="render" configurationId="tests" />
+    <history-entry file="pytest - 2018.04.12 at 10h 13m 00s.xml">
+      <configuration name="pytest" configurationId="tests" />
     </history-entry>
-    <history-entry file="test_render - 2018.03.12 at 13h 43m 41s.xml">
-      <configuration name="test_render" configurationId="tests" />
+    <history-entry file="pytest - 2018.04.12 at 10h 13m 37s.xml">
+      <configuration name="pytest" configurationId="tests" />
     </history-entry>
-    <history-entry file="test_render - 2018.03.12 at 13h 45m 14s.xml">
-      <configuration name="test_render" configurationId="tests" />
+    <history-entry file="pytest - 2018.04.12 at 10h 14m 04s.xml">
+      <configuration name="pytest" configurationId="tests" />
     </history-entry>
-    <history-entry file="test_render - 2018.04.12 at 09h 51m 14s.xml">
-      <configuration name="test_render" configurationId="tests" />
+    <history-entry file="pytest - 2018.04.12 at 10h 14m 31s.xml">
+      <configuration name="pytest" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest - 2018.04.12 at 10h 14m 57s.xml">
+      <configuration name="pytest" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest - 2018.04.12 at 10h 16m 38s.xml">
+      <configuration name="pytest" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest - 2018.04.12 at 10h 17m 11s.xml">
+      <configuration name="pytest" configurationId="tests" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
@@ -305,7 +318,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3286445" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3286445" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18884121" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -356,7 +369,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="simplifying things and add the cp tag. render_constants can't use multiple docs now." />
-    <option name="LAST_COMMIT_MESSAGE" value="simplifying things and add the cp tag. render_constants can't use multiple docs now." />
+    <MESSAGE value="Updating version number." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updating version number." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -634,31 +648,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_render.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="25" column="93" lean-forward="false" selection-start-line="25" selection-start-column="93" selection-end-line="25" selection-end-column="93" />
-          <folding>
-            <element signature="e#28#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_templates/simple/test_render_constants.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="52" lean-forward="true" selection-start-line="2" selection-start-column="52" selection-end-line="2" selection-end-column="52" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/aide_render/render.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="238" column="0" lean-forward="true" selection-start-line="238" selection-start-column="0" selection-end-line="238" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -672,9 +666,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/setup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="68" column="36" lean-forward="true" selection-start-line="68" selection-start-column="36" selection-end-line="68" selection-end-column="36" />
+        <state relative-caret-position="64">
+          <caret line="50" column="6" lean-forward="true" selection-start-line="50" selection-start-column="6" selection-end-line="50" selection-end-column="6" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_render.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+          <folding>
+            <element signature="e#28#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/aide_render/render.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="98" column="28" lean-forward="true" selection-start-line="98" selection-start-column="28" selection-end-line="98" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

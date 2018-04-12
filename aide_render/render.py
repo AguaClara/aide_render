@@ -92,11 +92,11 @@ def render_constants(environment, template_string):
     --------
     Jinja tags are returned as None:
 
-    >>> render_constants(None, "{'a jinja statement':{{5*u.m}}, 'jinja expr':{%yo%}, 'string expr': 'this works'}")
-    {'a jinja statement': None, 'jinja expr': None, 'string expr': 'this works'}
+    >>> render_constants(None, "{'a jinja statement':{{5*u.m}}, 'jinja expr':{%yo%}, 'cp': {'string expr': 'this works'}}")
+    {'string expr': 'this works'}
 
     The aide_render YAML implementation parses the units tag explicitly (!u) and implicitly ( 5 meter)
-    >>> render_constants(None, "{'explicit unit':!q 20 meter, 'implicit unit': 36 meter**3, 'complex implicit unit': 0.25 meter**3/liter}")
+    >>> render_constants(None, "{'cp': {'explicit unit':!q 20 meter, 'implicit unit': 36 meter**3, 'complex implicit unit': 0.25 meter**3/liter}}")
     {'explicit unit': <Quantity(20.0, 'meter')>, 'implicit unit': <Quantity(36.0, 'meter ** 3')>, 'complex implicit unit': <Quantity(0.25, 'meter ** 3 / liter')>}
 
     """
