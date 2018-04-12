@@ -1,7 +1,15 @@
-{% set parent = render_constants("test_render_recursive_parent.yaml") %}
-{% set see = render_constants("test_render_recursive_child.yaml") %}
-{% set self = see %}
-{% import "test_render_recursive_child.yaml" as poop with context %}
-parent_variable: "this is a variable defined in the parent"
+# get the constants from the parent.
+{% set parent_constants = render_constants("test_render_recursive_parent.yaml") %}
+
+# get the constants from the child.
+{% set child_constants = render_constants("test_render_recursive_child.yaml") %}
+
+{% import "test_render_recursive_child.yaml" as child %}
+
+
+cp:
+  number_of_fingers: 10
+  last_name: Smith
+  first_name: Julia
 child:
-  {{ poop.child(self, parent) }}
+{{ child.child("Harold", parent_constants.last_name) }}

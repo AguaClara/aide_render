@@ -1,2 +1,3 @@
-implicitly_defined_quantity: 45 meter
-that constant as a Jinja variable: {{ implicitly_defined_quantity }}
+cp:
+  implicitly_defined_quantity: 45 meter
+  that constant as a Jinja variable: {{ implicitly_defined_quantity }}

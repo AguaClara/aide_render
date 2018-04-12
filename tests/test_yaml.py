@@ -1,6 +1,9 @@
 from aide_render.yaml import load, dump
 from aide_design.play import *
 
+################### YAML tag testing ###############################
+
+# UNITS
 
 def test_load_yaml():
     # explicit with the u tag:
@@ -40,3 +43,4 @@ def test_yaml_hard_units():
         assert dump(d) == dump(load(dump(d)))
         #check if d is loaded reliably
         assert load(dump(d)) == load(dump(load(dump(d))))
+

@@ -7,16 +7,9 @@ import os
 import sys
 import re
 from aide_design.play import *
-import copy
-from jinja_atoms.ext import JinjaAtomsExtension
-from jinja_atoms.decorators import atom
 
 
-from jinja2 import contextfunction, environmentfunction
-
-@atom('/Users/ethankeller/git_repos/AguaClara/AIDE/aide_render/tests/test_templates', 'test_atom.yaml')
-def simple_atom(my_arg, my_kwarg=None):
-  return {'arg': my_arg, 'kwarg': my_kwarg}
+from jinja2 import contextfunction, environmentfunction, evalcontextfunction
 
 
 @contextfunction
@@ -77,21 +70,19 @@ def strip_jinja(string: str):
     string = re.sub(regex, '', string)
     return re.sub(regex, '', string)
 
-
-@contextfunction
-def render_constants(context, template):
+@environmentfunction
+def render_constants(environment, template_string):
     """
     Strip all Jinja tags from a template and render the remaining constants as
     a dict.
 
-    We access the current context to load the template from it's name. Instead, if you want to render constants
-    directly from a string of the source, pass in None as the context.
 
     Parameters
     ----------
-    context: instance of jinja2.runtime.Context or None
-        If used within Jinja templates, ignore the context argument because it is automatically passed in because this
-        is a contextfunction.
+    environment: jinja2.Environment
+        If this is called within a template, then the environment is automatically passed in and the template_string
+        is assumed to be the source string of the template. If no environment is passed in (as in testing), the
+        template_string is assumed to be the name of the template available to the environment's loader.
 
     template: string
         Either the template name if a context is passed in or the function is called within a template, or the source
@@ -109,22 +100,27 @@ def render_constants(context, template):
     {'explicit unit': <Quantity(20.0, 'meter')>, 'implicit unit': <Quantity(36.0, 'meter ** 3')>, 'complex implicit unit': <Quantity(0.25, 'meter ** 3 / liter')>}
 
     """
-    # If a context is passed, assume the template variable is the name of the template
-    if context:
-        env = context.environment
-        stream, filename, uptodate = env.loader.get_source(env, template)
-    # If the context isn't passed, assume template variable is the template source.
-    else:
-        stream = template
-        # Convert stream to string so we can use regex.
-        if not isinstance(template, str):
-            stream = template.read()
-    stripped_template = strip_jinja(stream)
-    d = yaml.load(stripped_template)
-    t = type(d)
+
+    if environment:
+        template_string, filename, uptodate = environment.loader.get_source(environment, template_string)
+
+    stripped_template = strip_jinja(template_string)
+    try:
+        doc = yaml.load(stripped_template)
+    except yaml.composer.ComposerError:
+        raise yaml.composer.ComposerError("The template has to have only one yaml doc defined.")
+
+    t = type(doc)
     if not t == dict:
         raise ValueError("Template must parse into a dict. Template was parsed as a {}".format(str(t)))
-    return yaml.load(stripped_template)
+
+    # Get just the cp variables:
+    try:
+        doc = doc["cp"]
+    except KeyError:
+        raise KeyError("Render constants only renders templates with a constants 'cp' tag")
+
+    return doc
 
 
 def source_from_path(file_path: str) -> str:
@@ -143,10 +139,11 @@ def source_from_path(file_path: str) -> str:
     with open(file_path) as f:
         return f.read()
 
-@contextfunction
-def assert_inputs(variables:dict, types_dict:dict, strict=True, silent=False, variables_explicit=None):
+
+def assert_inputs(variables: dict, types_dict: dict, strict=True, silent=False, variables_explicit=None):
     """Check variables against their expected type. Also can check more complex types, such as whether the expected
-    and actual dimensionality of pint units are equivalent.
+    and actual dimensionality of pint units are equivalent. This can be used within a Jinja template, but when doing
+    so, the "variables" argument is automatically filled with the context of the template.
 
     Parameters
     ----------
@@ -199,7 +196,6 @@ def assert_inputs(variables:dict, types_dict:dict, strict=True, silent=False, va
     TypeError: Can't convert the following implicitly: {'length': 'Actual dimensionality: [length] ** 2 Intended dimensionality: [length]'}.
 
     """
-    check = True
     # Store the intended types
     type_error_dicionary = {}
     # Store the missing variables
@@ -211,8 +207,10 @@ def assert_inputs(variables:dict, types_dict:dict, strict=True, silent=False, va
     for name, t in types_dict.items():
         try:
             var = variables[name]
-            # print(var)
-            # print(t.__repr__)
+
+            #check for recursive dicts. If there are, then recurse.
+            if isinstance(t, dict):
+                assert_inputs(var, t)
 
             # check if this is a pint variable and has compatible dimensionality.
             if isinstance(var, u.Quantity):
@@ -239,12 +237,9 @@ def assert_inputs(variables:dict, types_dict:dict, strict=True, silent=False, va
             raise TypeError("Can't convert the following implicitly: {}.".format(type_error_dicionary))
     return check
 
-aide_render_dict = {"u": u, "os": os, "render_constants": render_constants, "assert_inputs":
-    assert_inputs, "dict": dict, "show_context": show_context, "str": str, "float": float, "np": np, "dump": yaml.dump}
 
-
-@contextfunction
 def start_aide_render(template_folder_path, template_to_render, user_params):
+    from aide_render.import_dicts import aide_render_dict
     env = jinja2.Environment(
                              loader=jinja2.loaders.FileSystemLoader(template_folder_path),
                              trim_blocks=True,
@@ -252,3 +247,7 @@ def start_aide_render(template_folder_path, template_to_render, user_params):
                              )
     env.globals.update(aide_render_dict)
     return env.get_template(template_to_render).render(user_params)
+
+@contextfunction
+def get_context(context):
+    return context

@@ -1,6 +1,17 @@
-parent_variable: "this is a variable defined in the parent"
+# get the constants from the parent.
+
+# get the constants from the child.
+
+
+
+cp:
+  number_of_fingers: 10
+  last_name: Smith
+  first_name: Julia
 child:
-  inherited_variable: this is a variable defined in the parent
-child_variable: "I am from the child"
-child_variable_expressed: I am from the child
-variable: "I am a variable in the child"
+  last_name: Harold
+  first_name: Smith
+  eye_color: green
+  cp:
+    age: 0 year
+    first_thought: ahhhhh

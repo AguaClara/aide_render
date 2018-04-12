@@ -1,0 +1,5 @@
+name: aide_render
+channels:
+- conda-forge
+- defaults
+
