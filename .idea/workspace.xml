@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a2a4ca71-883c-42a2-b679-656b3e45b587" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/environment.yml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tests/test_example_usage.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tests/test_templates/block_stack_example/block_stack.yaml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tests/test_templates/pyramid_example/block.yaml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tests/test_templates/pyramid_example/pyramid.yaml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.pytest_cache/v/cache/lastfailed" afterPath="$PROJECT_DIR$/.pytest_cache/v/cache/lastfailed" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/aide_render/render.py" afterPath="$PROJECT_DIR$/aide_render/render.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/aide_render/yaml.py" afterPath="$PROJECT_DIR$/aide_render/yaml.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_render.py" afterPath="$PROJECT_DIR$/tests/test_render.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_templates/simple/test_render_constants.yaml" afterPath="$PROJECT_DIR$/tests/test_templates/simple/test_render_constants.yaml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_templates/simple/test_render_recursive_child.yaml" afterPath="$PROJECT_DIR$/tests/test_templates/simple/test_render_recursive_child.yaml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_templates/simple/test_render_recursive_output.yaml" afterPath="$PROJECT_DIR$/tests/test_templates/simple/test_render_recursive_output.yaml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_templates/simple/test_render_recursive_parent.yaml" afterPath="$PROJECT_DIR$/tests/test_templates/simple/test_render_recursive_parent.yaml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_yaml.py" afterPath="$PROJECT_DIR$/tests/test_yaml.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup.py" afterPath="$PROJECT_DIR$/setup.py" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -87,11 +74,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="environment.yml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="environment.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/environment.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
               <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="setup.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/setup.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="334">
+              <caret line="68" column="36" lean-forward="true" selection-start-line="68" selection-start-column="36" selection-end-line="68" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -132,7 +129,6 @@
         <option value="$PROJECT_DIR$/tests/test_templates/simple/block.yaml" />
         <option value="$PROJECT_DIR$/docs/conf.py" />
         <option value="$PROJECT_DIR$/tests/test_source_from_path.txt" />
-        <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/docs/index.rst" />
         <option value="$PROJECT_DIR$/tests/test_templates/test_render_pyramid.yaml" />
         <option value="$PROJECT_DIR$/tests/test_templates/test_render_block.yaml" />
@@ -156,6 +152,7 @@
         <option value="$PROJECT_DIR$/aide_render/render.py" />
         <option value="$PROJECT_DIR$/tests/test_render.py" />
         <option value="$PROJECT_DIR$/tests/test_templates/simple/test_render_constants.yaml" />
+        <option value="$PROJECT_DIR$/setup.py" />
       </list>
     </option>
   </component>
@@ -257,6 +254,14 @@
       <option name="presentableId" value="Default" />
       <updated>1520876392976</updated>
     </task>
+    <task id="LOCAL-00001" summary="simplifying things and add the cp tag. render_constants can't use multiple docs now.">
+      <created>1523542113450</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1523542113450</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -348,6 +353,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="simplifying things and add the cp tag. render_constants can't use multiple docs now." />
+    <option name="LAST_COMMIT_MESSAGE" value="simplifying things and add the cp tag. render_constants can't use multiple docs now." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -471,13 +480,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
           <caret line="15" column="67" lean-forward="false" selection-start-line="15" selection-start-column="67" selection-end-line="15" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="676">
-          <caret line="71" column="19" lean-forward="false" selection-start-line="71" selection-start-column="19" selection-end-line="71" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -664,6 +666,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="68" column="36" lean-forward="true" selection-start-line="68" selection-start-column="36" selection-end-line="68" selection-end-column="36" />
           <folding />
         </state>
       </provider>
