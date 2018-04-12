@@ -244,6 +244,7 @@ def start_aide_render(template_folder_path, template_to_render, user_params):
                              loader=jinja2.loaders.FileSystemLoader(template_folder_path),
                              trim_blocks=True,
                              lstrip_blocks=True,
+                             extensions=['jinja2.ext.do']
                              )
     env.globals.update(aide_render_dict)
     return env.get_template(template_to_render).render(user_params)
