@@ -73,7 +73,7 @@ def strip_jinja(string: str):
 @environmentfunction
 def render_constants(environment, template_string):
     """
-    Strip all Jinja tags from a template and render the remaining constants as
+    Strip all Jinja tags from a template and extract_types the remaining constants as
     a dict.
 
 

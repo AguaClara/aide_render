@@ -40,7 +40,7 @@ cp:
 
 def test_render_recursive():
     """
-    Test calling render() within a template
+    Test calling extract_types() within a template
     """
     folder_path = os.path.abspath('tests/test_templates/simple')
     output_file_path = os.path.abspath('tests/test_templates/simple/test_render_recursive_output.yaml')

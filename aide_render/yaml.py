@@ -10,9 +10,6 @@ from aide_design.units import unit_registry as u
 import re
 from .builder_classes import DP, HP
 
-tags_dict = {u'!q': u.Quantity, u'!DP': DP, u'!HP': HP}
-tags_dict_inverted = {v: k for k, v in tags_dict.items()}
-
 
 ############################### Representers and Constructors ###########################
 
@@ -35,14 +32,13 @@ def builder_class_constructor(loader, node):
 ############################### Turning on and off the tags ############################
 # Use this section to comment out tags as necessary.
 
+# the tags dict maps used tags to their relative classes.
+tags_dict = {u'!q': u.Quantity, u'!DP': DP, u'!HP': HP}
+tags_dict_inverted = {v: k for k, v in tags_dict.items()}
 
-# !q tag and constructor
-add_representer(u.Quantity, builder_class_representer)
-
-add_constructor(u'!q', builder_class_constructor)
-
-add_representer(DP, builder_class_representer)
-add_representer(HP, builder_class_representer)
+for k, v in tags_dict.items():
+    add_representer(v, builder_class_representer)
+    add_constructor(u'!q', builder_class_constructor)
 
 pattern = re.compile(r'[+-]?([0-9]*[.])?[0-9]+[ ]([A-z]+[/*]*[0-9]*)')
 add_implicit_resolver(u'!q', pattern)

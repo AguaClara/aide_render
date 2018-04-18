@@ -15,7 +15,13 @@ class HP(u.Quantity):
     """
     ...
 
+
 class Q(u.Quantity):
     """A Q (quantity) is an AIDE quantity.
     """
+    ...
+
+
+class Component(object):
+    """A component that can be drawn in CAD."""
     ...
