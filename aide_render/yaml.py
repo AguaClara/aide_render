@@ -5,7 +5,7 @@ their use case:
   * !quantity: used to represent a pint quantity: <Quantity(1.25, 'liter / second')>
 """
 
-from yaml import *
+from ruamel.yaml import *
 from aide_design.units import unit_registry as u
 import re
 from .builder_classes import DP, HP

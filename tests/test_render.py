@@ -2,12 +2,11 @@
 aide_render tests.
 """
 
-import pytest
-from aide_design.play import *
-from aide_render.render import render_constants, assert_inputs, source_from_path, start_aide_render
-from aide_render import yaml
 import os
+
 import jinja2
+from aide_design.play import *
+from aide_render.jinja_render.render import render_constants, assert_inputs, source_from_path, start_aide_render
 
 
 def test_render_constants():

@@ -1,15 +1,9 @@
-from aide_render import yaml
-import jinja2
-from aide_design.units import unit_registry as u
-import aide_design
-import numpy as np
-import os
-import sys
 import re
+
+import jinja2
 from aide_design.play import *
-
-
-from jinja2 import contextfunction, environmentfunction, evalcontextfunction
+from aide_render import yaml
+from jinja2 import contextfunction, environmentfunction
 
 
 @contextfunction
@@ -239,7 +233,7 @@ def assert_inputs(variables: dict, types_dict: dict, strict=True, silent=False, 
 
 
 def start_aide_render(template_folder_path, template_to_render, user_params):
-    from aide_render.import_dicts import aide_render_dict
+    from aide_render.jinja_render.import_dicts import aide_render_dict
     env = jinja2.Environment(
                              loader=jinja2.loaders.FileSystemLoader(template_folder_path),
                              trim_blocks=True,

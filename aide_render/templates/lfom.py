@@ -50,7 +50,7 @@ class LFOM:
     >>> #print(lfom_design_dict)
     >>> from aide_render.yaml import load, dump
     >>> dump(lfom_design_dict)
-    "{b_orifice_rows: !DP '2.5 centimeter ', centerline_0: !DP '1 ', centerline_1: !DP '0 ',\n  centerline_2: !DP '1 ', centerline_3: !DP '0 ', centerline_4: !DP '1 ', centerline_5: !DP '0 ',\n  centerline_6: !DP '1 ', centerline_7: !DP '0 ', d_orifice: !DP '2 meter ', n_rows: !DP '8 ',\n  num_orifices_final_0: !DP '1 ', num_orifices_final_1: !DP '0 ', num_orifices_final_2: !DP '0 ',\n  num_orifices_final_3: !DP '0 ', num_orifices_final_4: !DP '0 ', num_orifices_final_5: !DP '0 ',\n  num_orifices_final_6: !DP '0 ', num_orifices_final_7: !DP '0 ', od: !DP '10.75 inch ',\n  q: !DP '20 liter / second ', sdr: !DP '26 '}\n"
+    "{b_orifice_rows: !DP '2.5 centimeter ', centerline_0: !DP '1 ', centerline_1: !DP '0 ',\ncenterline_2: !DP '1 ', centerline_3: !DP '0 ', centerline_4: !DP '1 ', centerline_5: !DP '0 ',\ncenterline_6: !DP '1 ', centerline_7: !DP '0 ', d_orifice: !DP '2 meter ', n_rows: !DP '8 ',\nnum_orifices_final_0: !DP '1 ', num_orifices_final_1: !DP '0 ', num_orifices_final_2: !DP '0 ',\nnum_orifices_final_3: !DP '0 ', num_orifices_final_4: !DP '0 ', num_orifices_final_5: !DP '0 ',\nnum_orifices_final_6: !DP '0 ', num_orifices_final_7: !DP '0 ', od: !DP '10.75 inch ',\nq: !DP '20 liter / second ', sdr: !DP '26 '}\n"
 
 
     """
