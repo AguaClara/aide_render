@@ -6,3 +6,5 @@ coverage==4.0.3
 ##########pytest###################
 pytest==3.4.2
 ruamel.yaml==0.15.37
+aide_design
+scipy
