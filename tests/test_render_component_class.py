@@ -1,6 +1,6 @@
 from aide_render.builder_classes import HP, DP, Component, make_dp_fields
 from aide_design.units import unit_registry as u
-from aide_render.yaml import load, dump
+from aide_render.yaml import yaml
 from aide_render.builder import extract_types
 
 class SpecialComponent(Component):

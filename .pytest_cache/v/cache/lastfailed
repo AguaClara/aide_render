@@ -8,6 +8,7 @@
   "tests/test_example_usage.py::test_block_stack": true,
   "tests/test_example_usage.py::test_build_block": true,
   "tests/test_example_usage.py::test_build_pyramid": true,
+  "tests/test_render.py": true,
   "tests/test_render.py::test_render_constants2": true,
   "tests/test_render.py::test_render_simple": true,
   "tests/test_render.py::test_start_aide_render": true,

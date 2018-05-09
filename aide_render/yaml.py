@@ -5,10 +5,29 @@ their use case:
   * !quantity: used to represent a pint quantity: <Quantity(1.25, 'liter / second')>
 """
 
-from ruamel.yaml import *
+import ruamel.yaml as standard_yaml
+from ruamel.yaml.compat import StringIO
 from aide_design.units import unit_registry as u
 import re
 from .builder_classes import DP, HP
+import warnings
+warnings.simplefilter('ignore', standard_yaml.error.UnsafeLoaderWarning)
+
+
+
+class AideRenderYAML(standard_yaml.YAML):
+    def dump_to_string(self, data, stream=None, **kw):
+        inefficient = False
+        if stream is None:
+            inefficient = True
+            stream = StringIO()
+            standard_yaml.YAML.dump(self, data, stream, **kw)
+        if inefficient:
+            return stream.getvalue()
+
+
+# Create the aide_render instance of YAML - this has special resolvers and constructors.
+yaml = AideRenderYAML()
 
 
 ############################### Representers and Constructors ###########################
@@ -37,8 +56,11 @@ tags_dict = {u'!q': u.Quantity, u'!DP': DP, u'!HP': HP}
 tags_dict_inverted = {v: k for k, v in tags_dict.items()}
 
 for k, v in tags_dict.items():
-    add_representer(v, builder_class_representer)
-    add_constructor(u'!q', builder_class_constructor)
+    yaml.representer.add_representer(v, builder_class_representer)
+    yaml.constructor.add_constructor(u'!q', builder_class_constructor)
 
 pattern = re.compile(r'[+-]?([0-9]*[.])?[0-9]+[ ]([A-z]+[/*]*[0-9]*)')
-add_implicit_resolver(u'!q', pattern)
+yaml.resolver.add_implicit_resolver(u'!q', pattern, None)
+
+############################## Use to register the classes ###############################
+
