@@ -1,10 +1,11 @@
 ##########sphinx stuff###############
-Sphinx==1.4.1
+Sphinx
 ##########codecov###################
-codecov==2.0.3
-coverage==4.0.3
+codecov
+coverage
 ##########pytest###################
-pytest==3.4.2
-ruamel.yaml==0.15.37
+pytest
+ruamel.yaml
 aide_design
 scipy
+pytest-cov
