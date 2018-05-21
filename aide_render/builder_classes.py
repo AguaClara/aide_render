@@ -1,6 +1,6 @@
 """Include stub methods to indicate parameter types in plant python components."""
 
-from aide_design.units import unit_registry as u
+from aide_design.shared.units import unit_registry as u
 
 
 class DP(u.Quantity):
