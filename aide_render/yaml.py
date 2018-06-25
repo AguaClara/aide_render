@@ -1,4 +1,4 @@
-"""aide_render's YAML decomposition logic. aide_render uses standard pyYaml with
+"""aide_render's YAML decomposition logic. aide_render uses standard ruYaml with
 additional tags supported. Here's a list of the currently supported tags and
 their use case:
   * !q: used with a quantity string (ie: 5 meter) to represent a pint quantity.
@@ -14,7 +14,7 @@ import warnings
 warnings.simplefilter('ignore', standard_yaml.error.UnsafeLoaderWarning)
 
 
-
+# This enables us to return strings from YAML with dump_to_string
 class AideRenderYAML(standard_yaml.YAML):
     def dump_to_string(self, data, stream=None, **kw):
         inefficient = False
