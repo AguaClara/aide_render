@@ -1,6 +1,6 @@
 """All tier 1 classes used to build design components"""
 
-from aide_design.units import unit_registry as u
+from aide_design.shared.units import unit_registry as u
 
 
 class Q(u.Quantity):
