@@ -4,14 +4,19 @@ The root of the YAML string is the name of a class that will be built to represe
 are passed directly to the init functioin of that class. The return is an output YAML of the finished design.
 """
 
+import sys
 
-def render_lfom(yaml_path: str):
+def render_lfom(yaml_path: str, stream_out=sys.stdout, yaml_path_out=None):
     """
 
     Parameters
     ----------
     yaml_path
-        This is the path to the place that defines the LFOM
+        This is the path to the place that defines the LFOM.
+    stream_out:opt: sys.stdout
+        This is which stream to write the output to. Defaults to the standard out.
+    yaml_path_out:opt:None
+        This is where to write the output (which file path.)
 
     Returns
     -------
@@ -27,7 +32,7 @@ def render_lfom(yaml_path: str):
     >>> import aide_render
     >>> import os
     >>> file_path = os.path.join(os.path.dirname(__file__), "./example_yaml_params/lfom_inputs.yaml")
-    >>> aide_render.render_lfom(file_path)
+    >>> aide_render.render_lfom(file_path, yaml_path_out="test.yaml")
     CommentedMap([('q', 30)])
     params:
       ratio_safety: 1.5
@@ -85,3 +90,9 @@ def render_lfom(yaml_path: str):
     my_lfom = LFOM(**kwargs)
     lfom_design_dict = extract_types(my_lfom, [u.Quantity, int, float], [SimpleNamespace])
     yaml.dump(lfom_design_dict, stream=sys.stdout)
+
+    if stream_out:
+        yaml.dump(lfom_design_dict, stream=stream_out)
+    if yaml_path_out:
+        with open(yaml_path_out, 'w+') as f:
+            yaml.dump(lfom_design_dict, stream=f)
