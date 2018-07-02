@@ -3,6 +3,7 @@ import aide_design.pipedatabase as pipe
 import numpy as np
 from aide_design.units import unit_registry as u
 from aide_render.builder_classes import DP, HP
+from aide_render.yaml import yaml
 
 
 class LFOM:
@@ -45,12 +46,34 @@ class LFOM:
     --------
 
     >>> my_lfom = LFOM(HP(20, u.L/u.s))
+    >>> import sys
     >>> from aide_render.builder import extract_types
     >>> lfom_design_dict = extract_types(my_lfom, [DP], [])
     >>> #print(lfom_design_dict)
-    >>> from aide_render.yaml import load, dump
-    >>> dump(lfom_design_dict)
-    "{b_orifice_rows: !DP '2.5 centimeter ', centerline_0: !DP '1 ', centerline_1: !DP '0 ',\n  centerline_2: !DP '1 ', centerline_3: !DP '0 ', centerline_4: !DP '1 ', centerline_5: !DP '0 ',\n  centerline_6: !DP '1 ', centerline_7: !DP '0 ', d_orifice: !DP '2 meter ', n_rows: !DP '8 ',\n  num_orifices_final_0: !DP '1 ', num_orifices_final_1: !DP '0 ', num_orifices_final_2: !DP '0 ',\n  num_orifices_final_3: !DP '0 ', num_orifices_final_4: !DP '0 ', num_orifices_final_5: !DP '0 ',\n  num_orifices_final_6: !DP '0 ', num_orifices_final_7: !DP '0 ', od: !DP '10.75 inch ',\n  q: !DP '20 liter / second ', sdr: !DP '26 '}\n"
+    >>> from aide_render.yaml import yaml
+    >>> yaml.dump(lfom_design_dict, stream=sys.stdout)
+    sdr: !DP '26 '
+    q: !DP '20 liter / second '
+    n_rows: !DP '8 '
+    b_orifice_rows: !DP '2.5 centimeter '
+    od: !DP '10.75 inch '
+    d_orifice: !DP '2 meter '
+    num_orifices_final_0: !DP '1 '
+    centerline_0: !DP '1 '
+    num_orifices_final_1: !DP '0 '
+    centerline_1: !DP '0 '
+    num_orifices_final_2: !DP '0 '
+    centerline_2: !DP '1 '
+    num_orifices_final_3: !DP '0 '
+    centerline_3: !DP '0 '
+    num_orifices_final_4: !DP '0 '
+    centerline_4: !DP '1 '
+    num_orifices_final_5: !DP '0 '
+    centerline_5: !DP '0 '
+    num_orifices_final_6: !DP '0 '
+    centerline_6: !DP '1 '
+    num_orifices_final_7: !DP '0 '
+    centerline_7: !DP '0 '
 
 
     """
@@ -133,3 +156,7 @@ class LFOM:
             setattr(self, 'num_orifices_final_' + str(i), DP(num_orifices_final))
             setattr(self, 'centerline_' + str(i), DP(centerline))
             i += 1
+
+yaml.register_class(LFOM)
+
+import ruamel.yaml.error

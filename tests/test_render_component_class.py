@@ -1,6 +1,6 @@
-from aide_render.builder_classes import HP, DP, Component
+from aide_render.builder_classes import HP, DP, Component, make_dp_fields
 from aide_design.units import unit_registry as u
-from aide_render.yaml import load, dump
+from aide_render.yaml import yaml
 from aide_render.builder import extract_types
 
 class SpecialComponent(Component):
@@ -49,4 +49,18 @@ def test_extract_types():
     my_class = AListClass()
 
     assert extract_types(my_class, [int], [AListClass, dict]) == {'a_class_attribute': 5, 'a_dict': {'a': 1, 'b': 2}}
+
+
+def test_component_class_keyword_field_creation():
+
+    class Block(Component):
+        @make_dp_fields
+        def __init__(self, L=DP(1, u.m), w=DP(1, u.m), h=DP(1, u.m)):
+            self.another_variable = 5
+
+    b = Block(L=DP(4, u.m))
+    assert b.L == DP(4, u.m)
+    # assert b.w == DP(1,u.m) TODO: the defaults specified in the wrapped function aren't created as one of the instance's property.
+
+# def test_render
 
