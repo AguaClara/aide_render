@@ -4,6 +4,7 @@ Setup script.
 
 from distutils.core import Command
 from setuptools import setup
+import os
 
 
 class Coverage(Command):
@@ -69,5 +70,5 @@ setup(
         'virtualenv>=15.0.1,<16.0.0'
     ],
     url='https://github.com/AguaClara/aide_render',
-    version='0.0.2'
+    version= os.getenv("TRAVIS_TAG", "EXPERIMENTAL")
 )

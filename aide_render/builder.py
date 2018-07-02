@@ -46,33 +46,3 @@ def extract_types(instance: object, collect_types: list, recurse_types: list) ->
                     d_prime[name] = extract_types(var, collect_types, recurse_types)
                     break
     return d_prime
-
-
-def render_design(component_instance: Component, folder_path, filename = None, stream=None):
-    """Build the YAML as necessary to construct the Fusion model.
-
-    Parameters
-    ----------
-
-    Examples
-    --------
-
-    >>> from .builder_classes import HP, DP, Component
-    >>> from aide_design.play import u
-    >>> from .templates.lfom import LFOM
-    >>> my_lfom = LFOM(HP(20,u.L/u.s))
-    >>> render_design(my_lfom, "./test_output")
-
-    Now there should be a design_<date>.yaml design file that represents the component model.
-    """
-
-    if not filename:
-        filename = "design_" + strftime("%Y_%m_%d_%H_%M_%S") + ".yaml"
-
-    dp_dict = extract_types(component_instance, [DP], [Component])
-
-    file_path = os.path.join(os.path.abspath(folder_path), filename)
-    with open(file_path, mode = 'x') as file:
-        yaml.dump(dp_dict, stream=file)
-
-

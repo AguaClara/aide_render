@@ -81,3 +81,8 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# Other tings
+/test_output
+/.idea
+test.yaml
