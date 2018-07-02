@@ -85,3 +85,4 @@ venv.bak/
 # Other tings
 /test_output
 /.idea
+test.yaml

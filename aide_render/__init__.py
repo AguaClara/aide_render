@@ -33,29 +33,29 @@ def render_lfom(yaml_path: str, stream_out=sys.stdout, yaml_path_out=None):
     >>> import os
     >>> file_path = os.path.join(os.path.dirname(__file__), "./example_yaml_params/lfom_inputs.yaml")
     >>> aide_render.render_lfom(file_path, yaml_path_out="test.yaml")
-    CommentedMap([('q', 30)])
+    CommentedMap([('q', 70)])
     params:
       ratio_safety: 1.5
       sdr: 26
       hl: 20 centimeter
-      q: 30 liter / second
+      q: 70 liter / second
     dp:
       b_row: 5 centimeter
-      od: 12.75 inch
+      od: 18 inch
       d_orifice: 0.03125 meter
-      n_row1: 19
+      n_row1: 44
       n_row3: 0
       n_row5: 0
       n_row7: 0
-      n_row9: 8
+      n_row9: 19
       n_row11: 0
       n_row13: 0
       n_row15: 0
-      n_row17: 7
+      n_row17: 16
       n_row19: 0
       n_row21: 0
       n_row23: 0
-      n_row25: 5
+      n_row25: 12
       n_row27: 0
       n_row29: 0
       n_row31: 0
