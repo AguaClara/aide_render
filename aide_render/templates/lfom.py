@@ -2,25 +2,30 @@ import aide_design.materials_database as mat
 import aide_design.pipedatabase as pipe
 import numpy as np
 from aide_design.units import unit_registry as u
-from aide_render.builder_classes import DP, HP
 from aide_render.yaml import yaml
+from types import SimpleNamespace
+from ..utilities import assert_types
 
 
 class LFOM:
     r""" This is an example class for an LFOM. It already has a lot of features built in,
-    such as constants that go in the class attribute section (defaults), and methods.
-    As well as an instantiation process that can be used to set custom values.
+    such as defaults that go in the class attribute section, and methods associated with the class.
+    As well as an instantiation process that can be used to set custom values. In general, a class
+    gets inputs passed in through the init function in the form of keyword args. The keyword args
+    that are required are specified within the docstring. Furthermore, arguments can be type checked
+    using the assert_types function in the utilities module. When the LFOM class is created, the final
+    class is meant to represent an LFOM that can then be designed by CAD. Therefore, all CAD output
+    parameters are placed into the special "dp" instance field.
 
     Attributes
     ----------
-    These are the default values for an LFOM. To overwrite, pass these into the bod
-    (Basis Of Design) variable into the constructor.
+    These are the default values for an LFOM. To overwrite, pass these in as keywords.
 
     ratio_safety : float
         Percent above the top hole safety height.
     sdr : float
         Standard dimensional ratio of the LFOM pipe.
-    S_orifice : length
+    b_orifice : length
         Minimum distance between orifices.
     hl : length
         Headloss of the LFOM
@@ -29,8 +34,7 @@ class LFOM:
 
     Methods
     -------
-    All these methods are just imported from the aide_design lfom. This would
-    replace that.
+    All these methods are just imported from the aide_design lfom.
 
     n_lfom_rows(q, hl_lfom)
         number of rows of orifices in an lfom. This could be defined directly
@@ -45,44 +49,49 @@ class LFOM:
     Examples
     --------
 
-    >>> my_lfom = LFOM(HP(20, u.L/u.s))
+    >>> my_lfom = LFOM(q=30*u.L/u.s)
     >>> import sys
     >>> from aide_render.builder import extract_types
-    >>> lfom_design_dict = extract_types(my_lfom, [DP], [])
+    >>> lfom_design_dict = extract_types(my_lfom, [u.Quantity, int, float], [SimpleNamespace])
     >>> #print(lfom_design_dict)
     >>> from aide_render.yaml import yaml
     >>> yaml.dump(lfom_design_dict, stream=sys.stdout)
-    sdr: !DP '26 '
-    q: !DP '20 liter / second '
-    n_rows: !DP '8 '
-    b_orifice_rows: !DP '2.5 centimeter '
-    od: !DP '10.75 inch '
-    d_orifice: !DP '2 meter '
-    num_orifices_final_0: !DP '1 '
-    centerline_0: !DP '1 '
-    num_orifices_final_1: !DP '0 '
-    centerline_1: !DP '0 '
-    num_orifices_final_2: !DP '0 '
-    centerline_2: !DP '1 '
-    num_orifices_final_3: !DP '0 '
-    centerline_3: !DP '0 '
-    num_orifices_final_4: !DP '0 '
-    centerline_4: !DP '1 '
-    num_orifices_final_5: !DP '0 '
-    centerline_5: !DP '0 '
-    num_orifices_final_6: !DP '0 '
-    centerline_6: !DP '1 '
-    num_orifices_final_7: !DP '0 '
-    centerline_7: !DP '0 '
-
+    params:
+      ratio_safety: 1.5
+      sdr: 26
+      hl: 20 centimeter
+      q: 30 liter / second
+    dp:
+      b_row: 5 centimeter
+      od: 12.75 inch
+      d_orifice: 0.03125 meter
+      n_row1: 19
+      n_row3: 0
+      n_row5: 0
+      n_row7: 0
+      n_row9: 8
+      n_row11: 0
+      n_row13: 0
+      n_row15: 0
+      n_row17: 7
+      n_row19: 0
+      n_row21: 0
+      n_row23: 0
+      n_row25: 5
+      n_row27: 0
+      n_row29: 0
+      n_row31: 0
 
     """
 
     ############## ATTRIBUTES ################
-    ratio_safety = HP(1.5)
-    sdr = DP(26)
-    S_orifice = HP(1, u.cm)
-    hl = HP(20, u.cm)
+    # Set the default input for the class
+    params = SimpleNamespace(ratio_safety=1.5,
+                             sdr=26,
+                             hl=20*u.cm
+                             )
+
+
 
     ############### METHODS #################
     # Methods I import that are already defined in the functional layer.
@@ -99,32 +108,22 @@ class LFOM:
     n_lfom_orifices = staticmethod(n_lfom_orifices)
 
 
-    # This function takes the output of n_lfom_orifices and converts it to a list with 8
-    # entries that corresponds to the 8 possible rows. This is necessary to make the lfom
+    # This function takes the output of n_lfom_orifices and converts it to a list with 16
+    # entries that corresponds to the 16 possible rows. This is necessary to make the lfom
     # easier to construct in Fusion using patterns
     @staticmethod
     @u.wraps(None, [u.m ** 3 / u.s, u.m, u.inch, None], False)
     def n_lfom_orifices_fusion(FLOW, HL_LFOM, drill_bits, num_rows):
-        num_orifices_per_row = LFOM.n_lfom_orifices(FLOW, HL_LFOM, drill_bits)
-        num_orifices_final = np.zeros(8)
-        centerline = np.zeros(8)
-        center = True
-        for i in range(8):
-            if i % 2 == 1 and num_rows == 4:
-                centerline[i] = int(center)
-            elif num_rows == 4:
-                num_orifices_final[i] = num_orifices_per_row[i / 2]
-                centerline[i] = int(center)
-                center = not center
-            else:
-                num_orifices_final[i] = num_orifices_per_row[i]
-                centerline[i] = int(center)
-                center = not center
+        num_orifices_per_row = LFOM.n_lfom_orifices(FLOW, HL_LFOM, drill_bits) #array of number of orifices on each row.
+        num_orifices_fianl_per_row = np.zeros(16) # output array
+        n_rows_in = num_orifices_per_row.size
+        for i in range(n_rows_in):
+            num_orifices_fianl_per_row[int(i * 16/n_rows_in)]=num_orifices_per_row[i]
 
-        return num_orifices_final, centerline
+        return num_orifices_fianl_per_row
 
 
-    def __init__(self, q, bod=None):
+    def __init__(self, **kwargs):
         """
         This is where the "instantiation" occurs. Think of this as "rendering the
         template" or "using the cookie-cutter to make the cookie". Here is where we
@@ -133,28 +132,37 @@ class LFOM:
 
         Parameters
         ----------
-        bod (Basis of Design) : dict: optional
-            A dict of values that will override or add any attributes of the LFOM
-            component.
         q : flow rate
             The max flow rate the LFOM can handle
         """
 
-        # add bod as instance fields:
-        if bod:
-            for k, v in bod.items():
-                setattr(self, k, v)
+        # Check the types of the required inputs
+        required = {"q": u.L/u.s}
+        assert_types(kwargs, required)
 
-        self.q = DP(q)
-        self.n_rows = DP(self.n_lfom_rows(q, self.hl))
-        self.b_orifice_rows = DP(self.hl/self.n_rows)
-        self.od = DP(pipe.OD(self.nom_diam_lfom_pipe(q, self.hl)))
-        self.d_orifice = DP(self.orifice_diameter(q, self.hl, mat.DIAM_DRILL_ENG))
-        num_orifices_final_list, centerline_list = self.n_lfom_orifices_fusion(q, self.hl, mat.DIAM_DRILL_ENG, self.n_rows)
-        i = 0
-        for num_orifices_final, centerline in zip(num_orifices_final_list, centerline_list):
-            setattr(self, 'num_orifices_final_' + str(i), DP(num_orifices_final))
-            setattr(self, 'centerline_' + str(i), DP(centerline))
+
+        # Check the types of the optional inputs
+        optional = {"hL": u.cm}
+        assert_types(kwargs, optional, strict=False)
+
+        # Where the output sent to Fusion is stored
+        self.dp = SimpleNamespace()
+        dp = self.dp
+
+        params = self.params
+
+        # add kwargs as instance fields to params
+        for k, v in kwargs.items():
+            setattr(params, k, v)
+
+        n_rows = self.n_lfom_rows(params.q, params.hl)
+        dp.b_row = params.hl/n_rows
+        dp.od = pipe.OD(self.nom_diam_lfom_pipe(params.q, params.hl))
+        dp.d_orifice = self.orifice_diameter(params.q, params.hl, mat.DIAM_DRILL_ENG)
+        num_orifices_final = self.n_lfom_orifices_fusion(params.q, params.hl, mat.DIAM_DRILL_ENG, n_rows)
+        i=0
+        for num_per_row in num_orifices_final:
+            setattr(dp, 'n_row' + str(i*2+1), int(num_orifices_final[i]))
             i += 1
 
 yaml.register_class(LFOM)

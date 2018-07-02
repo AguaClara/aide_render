@@ -12,6 +12,10 @@ class Q(u.Quantity):
 class DP(Q):
     """A Design Parameter is a pint quantity that is passed into Fusion to draw the plant. Classes that have design
     parameters as properties are considered Fusion component classes, and should have a corresponding Fusion component.
+
+    Examples
+    --------
+
     """
     ...
 
@@ -42,6 +46,7 @@ def make_dp_fields(init_function):
     <aide_render.builder_classes.Block object at ...
 
     # >>> my_standard_block.h
+    TODO: finish this function
     """
     def wrapped_function(self, *args, **kwargs):
         for k, v in kwargs.items():

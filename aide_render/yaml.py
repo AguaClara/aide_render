@@ -52,7 +52,7 @@ def builder_class_constructor(loader, node):
 # Use this section to comment out tags as necessary.
 
 # the tags dict maps used tags to their relative classes.
-tags_dict = {u'!q': u.Quantity, u'!DP': DP, u'!HP': HP}
+tags_dict = {u'!q': u.Quantity, u'!D': DP, u'!H': HP}
 tags_dict_inverted = {v: k for k, v in tags_dict.items()}
 
 for k, v in tags_dict.items():
