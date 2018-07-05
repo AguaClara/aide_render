@@ -3,8 +3,8 @@ Setup script.
 """
 
 from distutils.core import Command
-from setuptools import setup
 import os
+from setuptools import setup, find_packages
 
 
 class Coverage(Command):
@@ -50,14 +50,10 @@ setup(
     cmdclass={
         'coverage': Coverage,
     },
-    install_requires=['pyyaml',
-    'jinja2','aide_design', 'numpy'
-    ],
+    install_requires=['ruamel.yaml', 'aide_design', 'numpy'],
     license='Apache License (2.0)',
     name='aide_render',
-    packages=[
-        'aide_render',
-    ],
+    packages=find_packages(),
     setup_requires=['pytest-runner'],
     scripts=[],
     test_suite='tests',

@@ -43,27 +43,27 @@ def render_lfom(yaml_path: str, stream_out=sys.stdout, yaml_path_out=None):
       b_row: 5 centimeter
       od: 18 inch
       d_orifice: 0.03125 meter
-      n_row1: 44
-      n_row3: 0
-      n_row5: 0
-      n_row7: 0
-      n_row9: 19
-      n_row11: 0
-      n_row13: 0
-      n_row15: 0
-      n_row17: 16
-      n_row19: 0
-      n_row21: 0
-      n_row23: 0
-      n_row25: 12
-      n_row27: 0
-      n_row29: 0
-      n_row31: 0
+      n_row_1: 44
+      n_row_2: 0
+      n_row_3: 0
+      n_row_4: 0
+      n_row_5: 19
+      n_row_6: 0
+      n_row_7: 0
+      n_row_8: 0
+      n_row_9: 16
+      n_row_10: 0
+      n_row_11: 0
+      n_row_12: 0
+      n_row_13: 12
+      n_row_14: 0
+      n_row_15: 0
+      n_row_16: 0
 
     """
     from aide_render.yaml import yaml
     from aide_render.builder_classes import DP, HP
-    from .templates.lfom import LFOM
+    from aide_render.templates.lfom import LFOM
     from aide_design.units import unit_registry as u
     import sys
     from aide_render.builder import extract_types
