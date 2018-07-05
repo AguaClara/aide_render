@@ -65,22 +65,22 @@ class LFOM:
       b_row: 5 centimeter
       od: 12.75 inch
       d_orifice: 0.03125 meter
-      n_row1: 19
-      n_row3: 0
-      n_row5: 0
-      n_row7: 0
-      n_row9: 8
-      n_row11: 0
-      n_row13: 0
-      n_row15: 0
-      n_row17: 7
-      n_row19: 0
-      n_row21: 0
-      n_row23: 0
-      n_row25: 5
-      n_row27: 0
-      n_row29: 0
-      n_row31: 0
+      n_row_1: 19
+      n_row_2: 0
+      n_row_3: 0
+      n_row_4: 0
+      n_row_5: 8
+      n_row_6: 0
+      n_row_7: 0
+      n_row_8: 0
+      n_row_9: 7
+      n_row_10: 0
+      n_row_11: 0
+      n_row_12: 0
+      n_row_13: 5
+      n_row_14: 0
+      n_row_15: 0
+      n_row_16: 0
 
     """
 
@@ -162,7 +162,7 @@ class LFOM:
         num_orifices_final = self.n_lfom_orifices_fusion(params.q, params.hl, mat.DIAM_DRILL_ENG, n_rows)
         i=0
         for num_per_row in num_orifices_final:
-            setattr(dp, 'n_row' + str(i*2+1), int(num_orifices_final[i]))
+            setattr(dp, 'n_row_' + str(i+1), int(num_per_row))
             i += 1
 
 yaml.register_class(LFOM)
