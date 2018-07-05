@@ -63,7 +63,7 @@ def render_lfom(yaml_path: str, stream_out=sys.stdout, yaml_path_out=None):
     """
     from aide_render.yaml import yaml
     from aide_render.builder_classes import DP, HP
-    from .templates.lfom import LFOM
+    from aide_render.templates.lfom import LFOM
     from aide_design.units import unit_registry as u
     import sys
     from aide_render.builder import extract_types
